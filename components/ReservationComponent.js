@@ -159,6 +159,22 @@ const styles = StyleSheet.create({
   formItem: {
     flex: 1,
   },
+  modal: {
+    justifyContent: "center",
+    margin: 20,
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    backgroundColor: "#512DA8",
+    textAlign: "center",
+    color: "white",
+    marginBottom: 20,
+  },
+  modalText: {
+    fontSize: 18,
+    margin: 10,
+  },
 });
 
 export default Reservation;
