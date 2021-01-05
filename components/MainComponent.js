@@ -27,6 +27,7 @@ import Home from "./HomeComponent";
 import Contact from "./ContactComponent";
 import About from "./AboutComponent";
 import Reservation from "./ReservationComponent";
+import Favorites from "./FavoriteComponent";
 
 const mapStateToProps = (state) => {
   return {
@@ -168,7 +169,32 @@ const ReservationStackNavigator = createStackNavigator(
           name="menu"
           size={24}
           iconStyle={{ color: "white" }}
-          onPress={() => navigation.navigate("DrawerToggle")}
+          onPress={() => navigation.toggleDrawer()}
+        />
+      ),
+    }),
+  }
+);
+
+const FavoritesStackNavigator = createStackNavigator(
+  {
+    Reservation: { screen: Favorites },
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: "#512DA8",
+      },
+      headerTitleStyle: {
+        color: "#fff",
+      },
+      headerTintColor: "#fff",
+      headerLeft: (
+        <Icon
+          name="menu"
+          size={24}
+          iconStyle={{ color: "white" }}
+          onPress={() => navigation.toggleDrawer()}
         />
       ),
     }),
@@ -180,6 +206,7 @@ const HomeNavigator = createAppContainer(HomeStackNavigator);
 const ContactNavigator = createAppContainer(ContactStackNavigator);
 const AboutNavigator = createAppContainer(AboutStackNavigator);
 const ReservationNavigator = createAppContainer(ReservationStackNavigator);
+const FavoritesNavigator = createAppContainer(FavoritesStackNavigator);
 
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
@@ -264,6 +291,22 @@ const MainDrawerNavigator = createDrawerNavigator(
         drawerIcon: ({ tintColor }) => (
           <Icon
             name="cutlery"
+            type="font-awesome"
+            size={24}
+            iconStyle={{ color: tintColor }}
+          />
+        ),
+      },
+    },
+
+    Favorites: {
+      screen: FavoritesNavigator,
+      navigationOptions: {
+        title: "My Favorites",
+        drawerLabel: "My Favorites",
+        drawerIcon: ({ tintColor }) => (
+          <Icon
+            name="heart"
             type="font-awesome"
             size={24}
             iconStyle={{ color: tintColor }}
