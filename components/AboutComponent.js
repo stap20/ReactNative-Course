@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Text, View, FlatList } from "react-native";
+import { Text, FlatList } from "react-native";
 import { Card, ListItem } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
+import { Loading } from "./LoadingComponent";
 
 const mapStateToProps = (state) => {
   return {
@@ -32,31 +33,50 @@ function History() {
 }
 
 function CorporateLeadership(props) {
-  const renderLeaderItem = ({ item, index }) => {
+  if (props.isLoading) {
     return (
-      <ListItem
-        key={index}
-        title={item.name}
-        subtitle={item.description}
-        hideChevron={true}
-        leftAvatar={{ source: { uri: baseUrl + item.image } }}
-      />
+      <ScrollView>
+        <History />
+        <Card title="Corporate Leadership">
+          <Loading />
+        </Card>
+      </ScrollView>
     );
-  };
+  } else if (props.errMess) {
+    return (
+      <ScrollView>
+        <History />
+        <Card title="Corporate Leadership">
+          <Text>{props.errMess}</Text>
+        </Card>
+      </ScrollView>
+    );
+  } else {
+    const renderLeaderItem = ({ item, index }) => {
+      return (
+        <ListItem
+          key={index}
+          title={item.name}
+          subtitle={item.description}
+          hideChevron={true}
+          leftAvatar={{ source: { uri: baseUrl + item.image } }}
+        />
+      );
+    };
 
-  return (
-    <Card title={"Corporate Leadership"}>
-      <FlatList
-        data={props.leaders}
-        renderItem={renderLeaderItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    </Card>
-  );
+    return (
+      <Card title={"Corporate Leadership"}>
+        <FlatList
+          data={props.leaders}
+          renderItem={renderLeaderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      </Card>
+    );
+  }
 }
 
 class About extends Component {
-
   static navigationOptions = {
     title: "About",
   };
@@ -65,7 +85,11 @@ class About extends Component {
     return (
       <ScrollView>
         <History />
-        <CorporateLeadership leaders={this.props.leaders.leaders} />
+        <CorporateLeadership
+          leaders={this.props.leaders.leaders}
+          isLoading={this.props.leaders.isLoading}
+          errMess={this.props.leaders.errMess}
+        />
       </ScrollView>
     );
   }
