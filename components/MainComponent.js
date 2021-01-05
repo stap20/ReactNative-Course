@@ -155,7 +155,7 @@ const ReservationStackNavigator = createStackNavigator(
     Reservation: { screen: Reservation },
   },
   {
-    navigationOptions: ({ navigation }) => ({
+    defaultNavigationOptions: ({ navigation }) => ({
       headerStyle: {
         backgroundColor: "#512DA8",
       },
