@@ -204,7 +204,7 @@ const FavoritesStackNavigator = createStackNavigator(
 
 const LoginStackNavigator = createStackNavigator(
   {
-    Login: { screen: Login },
+    Login: Login,
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -214,6 +214,7 @@ const LoginStackNavigator = createStackNavigator(
       headerTitleStyle: {
         color: "#fff",
       },
+      title: "Login",
       headerTintColor: "#fff",
       headerLeft: (
         <Icon
