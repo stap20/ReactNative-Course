@@ -32,7 +32,8 @@
     "redux-logger": "3.0.6",
     "redux-thunk": "2.2.0",
     "react-native-swipeout": "2.3.3",
-    "react-native-animatable": "1.2.4"
+    "react-native-animatable": "1.2.4",
+    "redux-persist": "5.9.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
