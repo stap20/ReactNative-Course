@@ -5,7 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 import { Loading } from "./LoadingComponent";
-
+import * as Animatable from "react-native-animatable";
 const mapStateToProps = (state) => {
   return {
     leaders: state.leaders,
@@ -65,13 +65,18 @@ function CorporateLeadership(props) {
     };
 
     return (
-      <Card title={"Corporate Leadership"}>
-        <FlatList
-          data={props.leaders}
-          renderItem={renderLeaderItem}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      </Card>
+      <ScrollView>
+        <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+          <History />
+          <Card title={"Corporate Leadership"}>
+            <FlatList
+              data={props.leaders}
+              renderItem={renderLeaderItem}
+              keyExtractor={(item) => item.id.toString()}
+            />
+          </Card>
+        </Animatable.View>
+      </ScrollView>
     );
   }
 }
@@ -84,12 +89,14 @@ class About extends Component {
   render() {
     return (
       <ScrollView>
-        <History />
-        <CorporateLeadership
-          leaders={this.props.leaders.leaders}
-          isLoading={this.props.leaders.isLoading}
-          errMess={this.props.leaders.errMess}
-        />
+        <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+          <History />
+          <CorporateLeadership
+            leaders={this.props.leaders.leaders}
+            isLoading={this.props.leaders.isLoading}
+            errMess={this.props.leaders.errMess}
+          />
+        </Animatable.View>
       </ScrollView>
     );
   }
